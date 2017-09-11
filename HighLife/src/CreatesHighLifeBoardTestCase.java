@@ -19,6 +19,9 @@ import junit.framework.Assert;
  *
  */
 public class CreatesHighLifeBoardTestCase {
+	/**
+	 * Creating a 0x0 board should run without creating exceptions. This is a border-case. 
+	 */
 	@Test
 	public void testCreateSmallestsBoard() {
 		int length = 0, width = 0;
@@ -32,6 +35,9 @@ public class CreatesHighLifeBoardTestCase {
 		}
 	}
 
+	/**
+	 * Should create a base 1x1 board.
+	 */
 	@Test
 	public void testCreateUnidimentionalBoard() {
 		int length = 1, width = 1;
@@ -41,16 +47,13 @@ public class CreatesHighLifeBoardTestCase {
 		for (int i = 0; i < data.length; i++) {
 			assertEquals("Row/Col should be unidimentional", data[i].length, 1);
 		}
-		
-		board = new HighLifeBoard(data);
-		assertEquals("Row/Col should be unidimentional", data.length, 1);
-		for (int i = 0; i < data.length; i++) {
-			assertEquals("Row/Col should be unidimentional", data[i].length, 1);
-		}
 	}
 
+	/**
+	 * Should create a normal sized board with no starting life on it.
+	 */
 	@Test
-	public void testCreateBoardRandomConstructor() {
+	public void testCreateBoard() {
 		int length = 10, width = 10;
 		HighLifeBoard board = new HighLifeBoard(length, width, false);
 
@@ -63,6 +66,10 @@ public class CreatesHighLifeBoardTestCase {
 		}
 	}
 
+	/**
+	 * Should create a normal board with a chance of having life.
+	 * This test can fail because is non-deterministic. Please a couple of times.
+	 */
 	@Test
 	public void testCreateBoardRandomConstructorAndTrue() {
 		int length = 10, width = 10;
