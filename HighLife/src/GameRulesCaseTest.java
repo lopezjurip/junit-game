@@ -34,36 +34,36 @@ public class GameRulesCaseTest {
 
 	/**
 	 * Test born rule according to HighLife rules.
-	 * "... a cell is born if it has 3 or 6 neighbors." 
+	 * "... a cell is born if it has 3 or 6 neighbors."
 	 */
 	@Test
 	public void testBornRule() {
 		for (int i = 0; i < 9; i++) {
 			HighLifeBoard board = createBoard(3, 3, i, false);
-			assertEquals("Cell should stil dead", board.isAlive(1, 1), false);
+			assertFalse("Cell should stil dead", board.isAlive(1, 1));
 
 			if (3 == i || i == 6) {
-				assertEquals("Cell should born", true, board.shouldBeBorn(1, 1));
+				assertTrue(String.format("Cell should born with %d neighbors", i), board.shouldBeBorn(1, 1));
 			} else {
-				assertEquals("Cell should stay dead", false, board.shouldBeBorn(1, 1));
+				assertFalse(String.format("Cell should stay dead with %d neighbors", i), board.shouldBeBorn(1, 1));
 			}
 		}
 	}
 
 	/**
 	 * Test survive rule according to HighLife rules.
-	 * "... survives if it has 2 or 3 neighbors." 
+	 * "... survives if it has 2 or 3 neighbors."
 	 */
 	@Test
 	public void testSurviveRule() {
 		for (int i = 0; i < 9; i++) {
 			HighLifeBoard board = createBoard(3, 3, i, true);
-			assertEquals("Cell should stil alive", true, board.isAlive(1, 1));
+			assertTrue("Cell should stil alive", board.isAlive(1, 1));
 
 			if (2 == i || i == 3) {
-				assertEquals("Cell should survive", true, board.shouldSurvive(1, 1));
+				assertTrue(String.format("Cell should survive with %d neighbors", i), board.shouldSurvive(1, 1));
 			} else {
-				assertEquals("Cell should die", false, board.shouldSurvive(1, 1));
+				assertFalse(String.format("Cell should die with %d neighbors", i), board.shouldSurvive(1, 1));
 			}
 		}
 	}

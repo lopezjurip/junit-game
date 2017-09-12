@@ -6,12 +6,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.sun.security.auth.SolarisNumericGroupPrincipal;
 import com.sun.xml.internal.ws.policy.sourcemodel.AssertionData;
 
 import junit.framework.Assert;
 
 /**
- * 
+ *
  */
 
 /**
@@ -20,7 +21,7 @@ import junit.framework.Assert;
  */
 public class CreatesHighLifeBoardTestCase {
 	/**
-	 * Creating a 0x0 board should run without creating exceptions. This is a border-case. 
+	 * Creating a 0x0 board should run without creating exceptions. This is a border-case.
 	 */
 	@Test
 	public void testCreateSmallestsBoard() {
@@ -50,6 +51,27 @@ public class CreatesHighLifeBoardTestCase {
 	}
 
 	/**
+	 * Test the method isAlive to check correctness and in-bounds.
+	 */
+	@Test
+	public void testIsAlive() {
+		HighLifeBoard board = new HighLifeBoard(1, 1);
+		board.setCell(0, 0, true);
+		assertTrue("Should say it's alive", board.isAlive(0, 0));
+
+		board.setCell(0, 0, false);
+		assertFalse("Should say it's not alive", board.isAlive(0, 0));
+
+		// Test out of bounds
+		assertFalse("Out-of-bounds should say false", board.isAlive(-1, 0));
+		assertFalse("Out-of-bounds should say false", board.isAlive(2, 0));
+		assertFalse("Out-of-bounds should say false", board.isAlive(0, -1));
+		assertFalse("Out-of-bounds should say false", board.isAlive(0, 2));
+		assertFalse("Out-of-bounds should say false", board.isAlive(-1, -1));
+		assertFalse("Out-of-bounds should say false", board.isAlive(2, 2));
+	}
+
+	/**
 	 * Should create a normal sized board with no starting life on it.
 	 */
 	@Test
@@ -73,16 +95,16 @@ public class CreatesHighLifeBoardTestCase {
 	@Test
 	public void testCreateBoardRandomConstructorAndTrue() {
 		int length = 10, width = 10;
-		HighLifeBoard board = new HighLifeBoard(length, width, false);
+		HighLifeBoard board = new HighLifeBoard(length, width, true);
 
 		boolean[][] data = board.getData();
 
-		boolean hasTrue = false;
+		boolean hasLife = false;
 		for (int i = 0; i < data.length; i++) {
 			for (int j = 0; j < data[i].length; j++) {
-				if (data[i][j]) hasTrue = true;
+				if (data[i][j]) hasLife = true;
 			}
 		}
-		assertEquals(hasTrue, true); // This is non-deterministic. Sometimes can fail.
+		assertTrue(hasLife); // This is non-deterministic. Sometimes can fail.
 	}
 }

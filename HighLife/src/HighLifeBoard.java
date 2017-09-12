@@ -27,7 +27,9 @@ public class HighLifeBoard {
     if(j < 0)
       j = 0;
     else if(j >= this.width)
-      i = this.width - 1;
+      j = this.width - 1;
+
+    this.board[i][j] = value;
   }
 
   /**
@@ -75,7 +77,7 @@ public class HighLifeBoard {
     if(i < 0 || i >= length)
       return false;
     else if (j < 0 || j >= width)
-      return true;
+      return false;
     else
       return board[i][j];
   }
@@ -92,7 +94,6 @@ public class HighLifeBoard {
     total += this.isAlive(i - 1, j) ? 1 : 0;
     total += this.isAlive(i - 1, j + 1) ? 1 : 0;
     total += this.isAlive(i, j - 1) ? 1 : 0;
-    total += this.isAlive(i, j) ? 1 : 0;
     total += this.isAlive(i, j + 1) ? 1 : 0;
     total += this.isAlive(i + 1, j - 1) ? 1 : 0;
     total += this.isAlive(i + 1, j) ? 1 : 0;
@@ -109,7 +110,7 @@ public class HighLifeBoard {
 
     int numAliveNeighbors = this.countAliveNeighbors(i, j);
 
-    if(numAliveNeighbors == 2 && numAliveNeighbors == 3)
+    if(numAliveNeighbors == 2 || numAliveNeighbors == 3)
       return true;
     else
       return false;
@@ -123,7 +124,7 @@ public class HighLifeBoard {
 
     int numAliveNeighbors = this.countAliveNeighbors(i, j);
 
-    if(numAliveNeighbors == 6)
+    if(numAliveNeighbors == 3 || numAliveNeighbors == 6)
       return true;
     else
       return false;
