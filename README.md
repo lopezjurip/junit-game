@@ -6,7 +6,7 @@
 
 * La razón de cada test está puesto en los `.java` sobre el respectivo test.
 
-## Bug fixing
+## Bug fixing
 
 ### `CreatesHighLifeBoardTestCase` -> `testIsAlive`
 
