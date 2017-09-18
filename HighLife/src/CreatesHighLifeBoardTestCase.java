@@ -90,7 +90,7 @@ public class CreatesHighLifeBoardTestCase {
 
 	/**
 	 * Should create a normal board with a chance of having life.
-	 * This test can fail because is non-deterministic. Please a couple of times.
+	 * This test can fail because is non-deterministic. Please run a couple of times.
 	 */
 	@Test
 	public void testCreateBoardRandomConstructorAndTrue() {
